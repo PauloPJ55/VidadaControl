@@ -15,6 +15,7 @@ const TABS = [
   { id: "leitura",     label: "Leitura",     icon: "📚" },
   { id: "empresa",     label: "Empresa",     icon: "🏢" },
   { id: "videos",      label: "Vídeos",      icon: "🎬" },
+  { id: "plano",       label: "Plano Digital", icon: "⚡" },
 ];
 
 const DAYS      = ["Seg","Ter","Qua","Qui","Sex","Sáb","Dom"];
@@ -406,7 +407,130 @@ export default function App() {
         )}
 
         {/* TAB */}
-        {activeTab !== "home" && tabData && currentTab && (
+        {/* ── PLANO DIGITAL ── */}
+        {activeTab === "plano" && (
+          <div>
+            <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:20 }}>
+              <span style={{ fontSize:28 }}>⚡</span>
+              <div>
+                <div style={{ fontFamily:"'Bebas Neue'", fontSize:24, color:"#e63946", letterSpacing:1 }}>Plano Digital</div>
+                <div className="label">sua rota para R$ 5.000/mês</div>
+              </div>
+            </div>
+
+            {/* Meta bar */}
+            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:14 }}>
+              {[["Meta mensal","R$ 5.000"],["Prazo","6 meses"],["Trabalho diário","3-4h/dia"],["Sono alvo","8h/noite"]].map(([label,val]) => (
+                <div key={label} className="stat-box">
+                  <div style={{ fontSize:18, fontFamily:"'Bebas Neue'", color:"#e63946" }}>{val}</div>
+                  <div className="label">{label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Rotina do dia */}
+            <div className="card" style={{ marginBottom:14 }}>
+              <div className="label" style={{ marginBottom:14 }}>rotina do dia</div>
+              {[
+                ["07:00","☀️","Acorda — sem celular por 30 min","Hidrata, luz natural, prepara a cabeça","manhã"],
+                ["07:30","🏃","Exercício físico","Corrida, caminhada ou alongamento. 30-40 min","corpo"],
+                ["08:10","🍳","Café da manhã completo","Proteína + carboidrato. Sem pressa","alimentação"],
+                ["08:40","📋","Planejamento do dia","1 tarefa principal. Abre o app, define o foco","foco"],
+                ["09:00","📚","Estudo — 90 min","Inglês, copy, marketing ou o que estiver no plano","estudo"],
+                ["10:30","☕","Pausa","15 min fora da tela","pausa"],
+                ["10:45","💻","Trabalho livre","Tarefas administrativas, responder mensagens","admin"],
+                ["12:00","🍽️","Almoço","Refeição principal. Sai da frente da tela","alimentação"],
+                ["13:10","💻","Bloco 1 — 90 min","Tarefa mais difícil do dia. Foco total","foco total"],
+                ["14:40","⏸️","Pausa","15 min. Anda, respira, sai da cadeira","pausa"],
+                ["15:00","💻","Bloco 2 — 90 min","Segunda tarefa ou continuação da primeira","foco total"],
+                ["16:30","🧹","Obrigações de casa","Animais, quintal, varrer. 30-40 min","casa"],
+                ["17:10","🚿","Preparo pra academia","Lanche pré-treino leve se precisar","prep"],
+                ["18:00","🏋️","Academia — até 2h","Seu momento de soltar o corpo. Até 20h","treino"],
+                ["20:00","🍖","Jantar moderado","Proteína + carboidrato leve","alimentação"],
+                ["20:30","📱","Bloco 3 — 60 min","Revisão, mensagens, planejar amanhã","leve"],
+                ["21:30","📺","Entretenimento","1 episódio ou 1h no máximo. Você merece","prazer"],
+                ["22:30","🌙","Desacelera","Tela no mínimo, luz baixa, banho morno","wind down"],
+                ["23:00","💤","Dorme","8h de sono = mais energia e resultado","sono"],
+              ].map(([hora, icon, titulo, desc, tag]) => (
+                <div key={hora} style={{ display:"grid", gridTemplateColumns:"70px 1fr auto", gap:0, background:"#0d0d0d", border:"1px solid #1a1a1a", borderRadius:6, marginBottom:3, overflow:"hidden" }}>
+                  <div style={{ padding:"12px 10px", fontFamily:"'Bebas Neue'", fontSize:13, color:"#e63946", borderRight:"1px solid #1a1a1a", display:"flex", alignItems:"center" }}>{hora}</div>
+                  <div style={{ padding:"10px 14px", display:"flex", alignItems:"center", gap:10 }}>
+                    <span style={{ fontSize:16 }}>{icon}</span>
+                    <div>
+                      <div style={{ fontSize:13, fontWeight:600, color:"#ddd" }}>{titulo}</div>
+                      <div style={{ fontSize:11, color:"#555", marginTop:2 }}>{desc}</div>
+                    </div>
+                  </div>
+                  <div style={{ padding:"0 12px", display:"flex", alignItems:"center" }}>
+                    <span style={{ background:"#1a1a1a", color:"#666", borderRadius:10, padding:"2px 8px", fontSize:10, whiteSpace:"nowrap" }}>{tag}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Operações */}
+            <div className="card" style={{ marginBottom:14 }}>
+              <div className="label" style={{ marginBottom:14 }}>sequência das operações</div>
+              {[
+                { n:"1", titulo:"Operação Hot", sub:"Agora — objetivo: R$ 1.000 de caixa", status:"ativo agora", cor:"#e63946",
+                  foco:"Tráfego em grupos → aquecimento Telegram → conversão WhatsApp → produto low ticket + upsell",
+                  prox:"Criar Telegram hoje. Finalizar copy da oferta. Começar aquecimento dos chips" },
+                { n:"2", titulo:"Low Ticket — Disparo WhatsApp", sub:"Quando o Hot estiver rodando sozinho", status:"próximo", cor:"#40c0a0",
+                  foco:"Você + 2 parceiros em 3 nichos. Começa no 1° nicho sozinho, valida oferta, depois replica",
+                  prox:"Primeiro acha uma oferta que vende. Só depois escala volume de disparo" },
+                { n:"3", titulo:"Low Ticket — Tráfego Pago + Orgânico", sub:"Quando já tiver renda estável das ops 1 e 2", status:"futuro", cor:"#888",
+                  foco:"Quando estiver tirando pelo menos R$ 2k/mês consistente nas operações anteriores",
+                  prox:"Precisa de verba pra tráfego. Acumula isso nas ops anteriores antes de entrar" },
+                { n:"4", titulo:"Apostas + Curso Próprio", sub:"Apostas: quando tiver banca. Curso: 2027", status:"longo prazo", cor:"#555",
+                  foco:"Surebet só com banca separada e capital que você pode perder. Nunca mistura com operação",
+                  prox:"Quando você tiver resultado real pra mostrar. Resultado é o melhor produto" },
+              ].map(op => (
+                <div key={op.n} style={{ background:"#0d0d0d", border:`1px solid ${op.cor}33`, borderRadius:10, marginBottom:10, overflow:"hidden" }}>
+                  <div style={{ padding:"14px 16px", display:"flex", alignItems:"center", gap:14, borderBottom:"1px solid #1a1a1a" }}>
+                    <div style={{ width:34, height:34, borderRadius:"50%", background:`${op.cor}22`, border:`1px solid ${op.cor}55`, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Bebas Neue'", fontSize:18, color:op.cor, flexShrink:0 }}>{op.n}</div>
+                    <div style={{ flex:1 }}>
+                      <div style={{ fontSize:14, fontWeight:600, color:"#ddd" }}>{op.titulo}</div>
+                      <div style={{ fontSize:11, color:"#555" }}>{op.sub}</div>
+                    </div>
+                    <span style={{ background:`${op.cor}22`, color:op.cor, borderRadius:10, padding:"3px 10px", fontSize:10, fontWeight:700, whiteSpace:"nowrap" }}>{op.status}</span>
+                  </div>
+                  <div style={{ padding:"12px 16px", display:"grid", gridTemplateColumns:"1fr 1fr", gap:12 }}>
+                    <div>
+                      <div style={{ fontSize:10, color:"#444", letterSpacing:2, textTransform:"uppercase", marginBottom:4 }}>Foco</div>
+                      <div style={{ fontSize:12, color:"#888", lineHeight:1.5 }}>{op.foco}</div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize:10, color:"#444", letterSpacing:2, textTransform:"uppercase", marginBottom:4 }}>Próximos passos</div>
+                      <div style={{ fontSize:12, color:"#888", lineHeight:1.5 }}>{op.prox}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Regras dos blocos */}
+            <div className="card">
+              <div className="label" style={{ marginBottom:14 }}>regras dos blocos de trabalho</div>
+              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
+                {[
+                  { titulo:"💻 Bloco 1 — 13:10", cor:"#40c0a0", items:["Tarefa mais difícil do dia","Copy, estrutura de oferta","Aquecimento de chip/conta","Tudo que exige pensar"] },
+                  { titulo:"💻 Bloco 2 — 15:00", cor:"#40c0a0", items:["Execução do bloco 1","Produção de conteúdo","Estruturar Telegram","Montar fluxo de WhatsApp"] },
+                  { titulo:"📱 Bloco 3 — 20:30", cor:"#e63946", items:["Revisão do que fez no dia","Responder leads e mensagens","Alinhar parceiros","Anotar tarefa principal de amanhã"] },
+                  { titulo:"⚡ Regra dos blocos", cor:"#f0c040", items:["Celular pessoal no silencioso","Uma tarefa por vez","Se travar, escreve no papel","Cada dia tem UMA tarefa principal"] },
+                ].map(bloco => (
+                  <div key={bloco.titulo} style={{ background:"#0d0d0d", border:"1px solid #1a1a1a", borderRadius:10, padding:14 }}>
+                    <div style={{ fontSize:13, fontWeight:700, color:bloco.cor, marginBottom:10 }}>{bloco.titulo}</div>
+                    {bloco.items.map(item => (
+                      <div key={item} style={{ fontSize:12, color:"#777", marginBottom:5, paddingLeft:10, borderLeft:`2px solid ${bloco.cor}44` }}>{item}</div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab !== "home" && activeTab !== "plano" && tabData && currentTab && (
           <div>
             <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:20 }}>
               <span style={{ fontSize:28 }}>{currentTab.icon}</span>
